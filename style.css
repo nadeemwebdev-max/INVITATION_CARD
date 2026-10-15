@@ -1,0 +1,1783 @@
+/* ==========================================================================
+   Tasnim Kousar Weds Sadaf - Royal Indian Muslim Wedding Invitation
+   Palette: Blush Pink, Sage Green, Warm Cream, Muted Gold
+   ========================================================================== */
+
+:root {
+  --color-cream-bg: #FDFBF7;
+  --color-cream-card: #FAF6EE;
+  --color-cream-dark: #F3ECE1;
+  --color-cream-subtle: #F7F3EB;
+
+  --color-blush-50: #FFF5F6;
+  --color-blush-100: #FCE8EA;
+  --color-blush-200: #F7D2D6;
+  --color-blush-300: #EFA8B1;
+  --color-blush-400: #DF7E8B;
+  --color-blush-deep: #9E4B56;
+
+  --color-sage-50: #F4F7F3;
+  --color-sage-100: #E3EBE1;
+  --color-sage-200: #C2D4BF;
+  --color-sage-300: #9BB397;
+  --color-sage-500: #6B8766;
+  --color-sage-800: #3E533B;
+
+  --color-gold-light: #F7E9B8;
+  --color-gold: #C5A059;
+  --color-gold-rich: #D4AF37;
+  --color-gold-dark: #937330;
+  --color-gold-burnished: #6E5320;
+
+  --color-text-main: #332B28;
+  --color-text-muted: #6E625D;
+  --color-text-light: #9B8E88;
+
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-script: 'Great Vibes', 'Alex Brush', cursive;
+  --font-display: 'Cinzel Decorative', 'Playfair Display', serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic: 'Amiri', 'Traditional Arabic', serif;
+
+  --gold-gradient: linear-gradient(135deg, #ECCF7A 0%, #C5A059 40%, #937330 70%, #ECCF7A 100%);
+  --gold-text-gradient: linear-gradient(135deg, #B58B3C 0%, #D8B763 35%, #8B6B28 70%, #C8A54E 100%);
+  --blush-gold-gradient: linear-gradient(135deg, #FAF6EE 0%, #FDEEEF 50%, #FAF6EE 100%);
+
+  --shadow-envelope: 0 30px 60px -15px rgba(100, 75, 60, 0.2), 0 15px 25px -10px rgba(100, 75, 60, 0.15);
+  --shadow-card: 0 20px 45px -10px rgba(110, 83, 67, 0.18), 0 5px 15px rgba(0, 0, 0, 0.05);
+  --shadow-gold: 0 8px 25px rgba(197, 160, 89, 0.25);
+}
+
+/* Base & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--color-cream-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--color-cream-bg);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(247, 210, 214, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(194, 212, 191, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(243, 236, 225, 0.3) 0%, transparent 60%);
+  color: var(--color-text-main);
+  overflow-x: hidden;
+}
+
+/* Subtle Mughal Jaali Pattern Overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L45 15L30 30L15 15zM0 30L15 45L0 60L-15 45zM60 30L75 45L60 60L45 45zM30 60L45 75L30 90L15 75z' fill='%23C5A059' fill-opacity='0.035' fill-rule='evenodd'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating Petals Canvas */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Audio Player Floating Pill */
+.audio-toggle-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: rgba(253, 251, 247, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  padding: 10px 18px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(110, 83, 67, 0.15), 0 0 15px rgba(212, 175, 55, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  color: var(--color-gold-burnished);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.audio-toggle-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--color-gold-rich);
+  box-shadow: 0 10px 25px rgba(110, 83, 67, 0.22), 0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+.audio-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+  width: 16px;
+}
+
+.audio-bar {
+  width: 3px;
+  background: var(--color-gold-rich);
+  border-radius: 2px;
+  height: 4px;
+  transition: height 0.2s ease;
+}
+
+.audio-toggle-btn.playing .audio-bar:nth-child(1) {
+  animation: eq-bounce 1s infinite alternate ease-in-out;
+}
+.audio-toggle-btn.playing .audio-bar:nth-child(2) {
+  animation: eq-bounce 0.8s infinite alternate 0.2s ease-in-out;
+}
+.audio-toggle-btn.playing .audio-bar:nth-child(3) {
+  animation: eq-bounce 1.2s infinite alternate 0.4s ease-in-out;
+}
+
+@keyframes eq-bounce {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+/* ==========================================================================
+   HERO SECTION: 3D DIGITAL ENVELOPE
+   ========================================================================== */
+.hero-envelope-stage {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 60px;
+  perspective: 1400px;
+  z-index: 10;
+  overflow: visible;
+  transition: min-height 0.8s ease;
+}
+
+.envelope-intro-text {
+  text-align: center;
+  margin-bottom: 24px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.envelope-intro-text .wedding-invite-of-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(110, 83, 32, 0.12);
+}
+
+.envelope-intro-text .wedding-invite-of-title::before,
+.envelope-intro-text .wedding-invite-of-title::after {
+  content: '✦';
+  font-size: 0.8rem;
+  color: var(--color-gold-rich);
+  opacity: 0.85;
+}
+
+
+
+/* 3D Envelope Wrapper */
+.envelope-wrapper {
+  position: relative;
+  width: 480px;
+  max-width: 92vw;
+  height: 330px;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 25px 40px rgba(90, 65, 50, 0.28));
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.envelope-wrapper:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* ==========================================================================
+   INTENSE INNER ENVELOPE RADIANCE & LIGHT SHAFTS (BRIGHT LIGHT FROM INSIDE)
+   ========================================================================== */
+.envelope-inner-radiance {
+  position: absolute;
+  bottom: 10%;
+  left: 4%;
+  right: 4%;
+  height: 75%;
+  background: radial-gradient(ellipse at 50% 40%, 
+    #FFFFFF 0%, 
+    #FFFDF2 25%, 
+    rgba(255, 245, 190, 0.96) 45%, 
+    rgba(236, 207, 122, 0.75) 65%, 
+    rgba(212, 175, 55, 0) 85%);
+  border-radius: 50% 50% 12px 12px;
+  opacity: 0;
+  transform: translate3d(0, 30px, 0) scale(0.6);
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  transition: transform 3.0s cubic-bezier(0.16, 1, 0.3, 1), opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  filter: blur(2px);
+}
+
+.hero-envelope-stage.opened .envelope-inner-radiance {
+  opacity: 1;
+  transform: translate3d(0, -10px, 0) scale(1.3);
+  box-shadow: 0 -25px 85px rgba(255, 255, 255, 0.98), 0 0 110px rgba(255, 235, 160, 0.92);
+  animation: inner-radiance-glow 3.5s infinite alternate ease-in-out;
+}
+
+@keyframes inner-radiance-glow {
+  0% { filter: blur(2px) brightness(1.1); transform: translate3d(0, -10px, 0) scale(1.25); }
+  100% { filter: blur(4px) brightness(1.35); transform: translate3d(0, -14px, 0) scale(1.34); }
+}
+
+/* Volumetric Light Shafts Shooting Upward from Inside Opening */
+.envelope-light-shafts {
+  position: absolute;
+  bottom: 45%;
+  left: -35%;
+  right: -35%;
+  height: 240%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  transform: translate3d(0, 60px, 0) scaleY(0.1) scaleX(0.4);
+  background: conic-gradient(
+    from 245deg at 50% 100%,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.95) 8deg,
+    transparent 14deg,
+    rgba(255, 245, 195, 0.85) 24deg,
+    transparent 30deg,
+    rgba(255, 255, 255, 1) 40deg,
+    transparent 46deg,
+    rgba(255, 240, 180, 0.9) 56deg,
+    transparent 64deg,
+    rgba(255, 255, 255, 0.95) 74deg,
+    transparent 80deg
+  );
+  mix-blend-mode: screen;
+  filter: blur(5px);
+  transition: transform 3.2s cubic-bezier(0.18, 1, 0.32, 1), opacity 2.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.hero-envelope-stage.opened .envelope-light-shafts {
+  opacity: 1;
+  transform: translate3d(0, -50%, 0) scaleY(2.2) scaleX(1.4);
+  animation: light-shafts-drift 4s infinite alternate ease-in-out;
+}
+
+@keyframes light-shafts-drift {
+  0% { filter: blur(4px) brightness(1); transform: translate3d(0, -50%, 0) scaleY(2.15) scaleX(1.38); }
+  100% { filter: blur(6px) brightness(1.3); transform: translate3d(0, -53%, 0) scaleY(2.3) scaleX(1.46); }
+}
+
+/* Pocket Lip Glow (Light spilling over envelope pocket mouth) */
+.envelope-pocket-lip-glow {
+  position: absolute;
+  top: 42%;
+  left: 8%;
+  right: 8%;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, #FFFFFF 0%, rgba(255, 245, 190, 0.95) 45%, transparent 80%);
+  box-shadow: 0 0 25px #FFFFFF, 0 0 50px rgba(255, 235, 140, 0.9);
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 2.0s ease, transform 2.6s ease;
+  transform: translate3d(0, 10px, 0) scale(0.6);
+  will-change: transform, opacity;
+}
+
+.hero-envelope-stage.opened .envelope-pocket-lip-glow {
+  opacity: 1;
+  transform: translate3d(0, -2px, 0) scale(1.08);
+}
+
+/* Flap Inner Glow */
+.flap-inner-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 242, 185, 0.6) 45%, transparent 75%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 2.4s ease;
+  will-change: opacity;
+}
+
+.hero-envelope-stage.opened .flap-inner-glow {
+  opacity: 1;
+}
+
+/* Seal Break Flash */
+.seal-break-flash {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translate3d(-50%, -50%, 0) scale(0.2);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, rgba(255, 245, 200, 0.95) 35%, rgba(212, 175, 55, 0.5) 65%, transparent 85%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(2px);
+  transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 2.0s ease;
+  will-change: transform, opacity;
+}
+
+.hero-envelope-stage.opened .seal-break-flash {
+  transform: translate3d(-50%, -50%, 0) scale(1.85);
+  opacity: 1;
+}
+
+/* Envelope Back Base */
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #F3ECE1;
+  background-image: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(235, 222, 206, 0.92) 100%),
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  border-radius: 12px;
+  box-shadow: inset 0 0 45px rgba(160, 125, 80, 0.22);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  z-index: 1;
+}
+
+/* Elegant Inner Lining pattern inside envelope */
+.envelope-liner {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  background: #FCE8EA;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.18) 1px, transparent 1px),
+    linear-gradient(45deg, rgba(223, 126, 139, 0.08) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(155, 179, 151, 0.08) 25%, transparent 25%);
+  background-size: 16px 16px;
+  border-radius: 8px;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+/* The Invitation Card nestled inside the envelope */
+.envelope-nested-card {
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  right: 16px;
+  bottom: 20px;
+  background: var(--color-cream-card);
+  border-radius: 10px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  z-index: 3;
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  transition: transform 3.4s cubic-bezier(0.18, 1, 0.32, 1), box-shadow 3.0s ease, filter 2.8s ease;
+  will-change: transform, box-shadow, filter;
+  overflow: hidden;
+}
+
+.nested-card-inner {
+  position: relative;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 6px;
+  padding: 14px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #FFFDF9 0%, #FAF5EC 100%);
+  overflow: hidden;
+}
+
+.card-light-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.85) 50%, transparent 75%);
+  transform: translateX(-150%);
+  pointer-events: none;
+  z-index: 6;
+}
+
+.hero-envelope-stage.opened .card-light-sheen {
+  animation: slow-sheen 3.2s 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes slow-sheen {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(150%); }
+}
+
+.nested-card-bismillah {
+  font-family: var(--font-arabic);
+  font-size: 1.25rem;
+  color: var(--color-gold-burnished);
+  margin-bottom: 4px;
+  filter: drop-shadow(0 1px 2px rgba(110, 83, 32, 0.15));
+}
+
+.nested-card-pretitle {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.nested-card-names {
+  font-family: var(--font-script);
+  font-size: 2.3rem;
+  color: var(--color-blush-deep);
+  line-height: 1.15;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 3px rgba(158, 75, 86, 0.15);
+}
+
+.nested-card-date {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--color-sage-800);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.nested-card-venue {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.nested-card-flourish {
+  color: var(--color-gold-rich);
+  font-size: 0.85rem;
+}
+
+/* Scalable Responsive Envelope Pocket Flaps */
+.envelope-pocket-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 56%;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: linear-gradient(135deg, #F8F2E8 0%, #EFE5D7 100%);
+  filter: drop-shadow(4px 0 10px rgba(100, 75, 55, 0.12));
+  z-index: 4;
+}
+
+.envelope-pocket-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 56%;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+  background: linear-gradient(-135deg, #F6EFE5 0%, #EDE1D0 100%);
+  filter: drop-shadow(-4px 0 10px rgba(100, 75, 55, 0.12));
+  z-index: 4;
+}
+
+.envelope-pocket-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 58%;
+  clip-path: polygon(0 100%, 50% 15%, 100% 100%);
+  background: linear-gradient(to top, #ECE0D0 0%, #FAF3E8 100%);
+  filter: drop-shadow(0 -6px 14px rgba(100, 75, 55, 0.15));
+  z-index: 5;
+}
+
+/* Envelope Flap (Top Triangular Flap that rotates 180deg in slow motion) */
+.envelope-flap-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(to bottom, #FAF3E7 0%, #ECE0CF 100%);
+  transform-origin: top center;
+  transform: translate3d(0, 0, 0) rotateX(0deg);
+  backface-visibility: hidden;
+  transition: transform 3.2s cubic-bezier(0.22, 1, 0.36, 1), z-index 0.1s 1.4s;
+  z-index: 6;
+  filter: drop-shadow(0 8px 16px rgba(110, 83, 67, 0.22));
+  will-change: transform;
+}
+
+/* Wax Seal Button centered on the tip of the flap */
+.wax-seal-wrapper {
+  position: absolute;
+  top: 56%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 7;
+  cursor: pointer;
+  transition: transform 2.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 2.4s cubic-bezier(0.4, 0, 0.2, 1), filter 2.4s ease;
+  will-change: transform, opacity, filter;
+}
+
+.wax-seal-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(110, 70, 20, 0.4));
+  transition: transform 0.4s ease;
+  animation: seal-pulse 3s infinite ease-in-out;
+}
+
+@keyframes seal-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 6px 16px rgba(110, 70, 20, 0.4));
+  }
+  50% {
+    transform: scale(1.05);
+    filter: drop-shadow(0 8px 25px rgba(212, 175, 55, 0.65));
+  }
+}
+
+.wax-seal-wrapper:hover .wax-seal-img {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* Open Indicator Prompt Button */
+.open-invite-action {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.btn-open-envelope {
+  background: var(--gold-gradient);
+  border: none;
+  color: #FFFFFF;
+  padding: 14px 34px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(197, 160, 89, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-open-envelope:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(197, 160, 89, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.scroll-hint {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: float-down 2s infinite ease-in-out;
+}
+
+@keyframes float-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* ==========================================================================
+   ENVELOPE OPENED STATE ANIMATIONS (SLOW MOTION & BRIGHT REVEAL)
+   ========================================================================== */
+.hero-envelope-stage.opened .envelope-flap-top {
+  transform: translate3d(0, 0, 0) rotateX(180deg);
+  z-index: 2;
+  filter: drop-shadow(0 -4px 10px rgba(110, 83, 67, 0.12));
+}
+
+.hero-envelope-stage.opened .wax-seal-wrapper {
+  transform: translate3d(-50%, -190%, 0) scale(1.35);
+  opacity: 0;
+  filter: drop-shadow(0 0 50px #FFFFFF) brightness(1.85);
+  pointer-events: none;
+}
+
+.hero-envelope-stage.opened .envelope-nested-card {
+  animation: card-reveal-center-closer 3.6s cubic-bezier(0.18, 0.9, 0.25, 1) forwards;
+  z-index: 20;
+}
+
+.hero-envelope-stage.opened .envelope-nested-card:hover {
+  transform: translate3d(0, -6%, 85px) scale(1.26);
+  box-shadow: 
+    0 0 75px rgba(255, 250, 220, 1),
+    0 0 125px rgba(236, 207, 122, 0.92),
+    0 35px 75px rgba(60, 45, 35, 0.42);
+}
+
+@keyframes card-reveal-center-closer {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    z-index: 3;
+    filter: brightness(1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+  26% {
+    /* Lift up gently out of the envelope pocket mouth */
+    transform: translate3d(0, -28%, 10px) scale(1.02);
+    z-index: 3;
+    filter: brightness(1.04);
+  }
+  32% {
+    /* Seamlessly elevate above the envelope pocket flaps */
+    z-index: 20;
+  }
+  68% {
+    /* Glide into center while elevating and scaling closer in 3D */
+    transform: translate3d(0, -10%, 55px) scale(1.18);
+    z-index: 20;
+    box-shadow: 
+      0 0 50px rgba(255, 250, 220, 0.95),
+      0 0 95px rgba(236, 207, 122, 0.78),
+      0 22px 55px rgba(70, 50, 40, 0.32);
+  }
+  100% {
+    /* Sits gracefully in the dead center and moved closer to the guest */
+    transform: translate3d(0, -6%, 75px) scale(1.24);
+    z-index: 20;
+    box-shadow: 
+      0 0 65px rgba(255, 250, 220, 0.98),
+      0 0 115px rgba(236, 207, 122, 0.82),
+      0 30px 65px rgba(60, 45, 35, 0.38);
+    filter: brightness(1.08) contrast(1.03);
+  }
+}
+
+.hero-envelope-stage.opened .open-invite-action,
+.hero-envelope-stage.opened .envelope-intro-text {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+/* Centered Card Navigation Prompt (Fades in once card is centered and close) */
+.card-revealed-hint {
+  position: relative;
+  margin-top: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 25;
+}
+
+.hero-envelope-stage.opened .card-revealed-hint {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 2.8s;
+}
+
+.btn-scroll-to-details {
+  background: rgba(255, 253, 249, 0.95);
+  border: 1px solid var(--color-gold-burnished);
+  color: var(--color-primary-navy);
+  padding: 13px 32px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(110, 83, 32, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn-scroll-to-details i {
+  color: var(--color-gold-burnished);
+  animation: bounce-subtle 2s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.btn-scroll-to-details:hover {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(197, 160, 89, 0.45);
+}
+
+.btn-scroll-to-details:hover i {
+  color: #FFFFFF;
+  transform: translateY(3px);
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Replay / Reset Envelope Pill Button */
+.envelope-controls-bar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 998;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-pill-icon {
+  background: rgba(253, 251, 247, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-gold-burnished);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.btn-pill-icon:hover {
+  background: #FFFFFF;
+  border-color: var(--color-gold-rich);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(197, 160, 89, 0.2);
+}
+
+/* ==========================================================================
+   MAIN INVITATION CARD CONTAINER
+   ========================================================================== */
+.main-invitation-container {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  z-index: 20;
+}
+
+.royal-card-surface {
+  position: relative;
+  background: var(--color-cream-card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  overflow: hidden;
+  padding: 0 0 60px;
+}
+
+/* Outer Ornate Double Border */
+.royal-card-surface::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.royal-card-surface::after {
+  content: '';
+  position: absolute;
+  inset: 18px;
+  border: 1px dashed rgba(197, 160, 89, 0.2);
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Hanging Floral Arch Header */
+.floral-arch-header-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+.floral-arch-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.01);
+  transition: transform 6s ease-out;
+}
+
+.floral-arch-header-wrap:hover .floral-arch-img {
+  transform: scale(1.03);
+}
+
+.floral-arch-gradient-blend {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 65%, var(--color-cream-card) 100%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL & SECTION STYLING
+   ========================================================================== */
+.card-content-body {
+  position: relative;
+  padding: 30px 40px 10px;
+  z-index: 15;
+}
+
+@media (max-width: 600px) {
+  .card-content-body {
+    padding: 20px 20px 10px;
+  }
+}
+
+.invitation-section {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.invitation-section.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Dividers with Ornate Gold Motifs */
+.ornate-gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 30px auto;
+  max-width: 380px;
+}
+
+.ornate-divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.6), transparent);
+}
+
+.ornate-divider-symbol {
+  color: var(--color-gold-rich);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   SECTION 1: BISMILLAH & WELCOME BLESSINGS
+   ========================================================================== */
+.bismillah-calligraphy-wrap {
+  margin-bottom: 24px;
+}
+
+.bismillah-arabic {
+  font-family: var(--font-arabic);
+  font-size: 2.6rem;
+  line-height: 1.4;
+  color: var(--color-gold-dark);
+  background: var(--gold-text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(147, 115, 48, 0.15));
+  display: inline-block;
+}
+
+.bismillah-translation {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 580px;
+  margin: 8px auto 0;
+  line-height: 1.6;
+}
+
+.welcome-blessing-text {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--color-text-main);
+  line-height: 1.8;
+  max-width: 650px;
+  margin: 18px auto 0;
+  font-weight: 500;
+}
+
+.host-name {
+  color: var(--color-blush-deep);
+  font-weight: 600;
+  display: inline;
+}
+
+/* ==========================================================================
+   SECTION 2: THE COUPLE & CENTERPIECE PORTRAIT
+   ========================================================================== */
+.couple-announcement-header {
+  margin-bottom: 24px;
+}
+
+.couple-prelude {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  margin-bottom: 12px;
+}
+
+.couple-names-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.bride-name, .groom-name {
+  font-family: var(--font-script);
+  font-size: 4rem;
+  line-height: 1.1;
+  color: var(--color-blush-deep);
+  text-shadow: 0 2px 6px rgba(158, 75, 86, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.bride-name:hover, .groom-name:hover {
+  transform: scale(1.02);
+}
+
+.weds-conjunction {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--color-gold-rich);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin: 4px 0;
+}
+
+.weds-conjunction::before, .weds-conjunction::after {
+  content: '';
+  width: 35px;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+
+.groom-parentage {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+}
+
+.groom-parentage strong {
+  color: var(--color-text-main);
+  font-weight: 600;
+}
+
+/* Centerpiece Portrait Arch Frame */
+.couple-portrait-showcase {
+  position: relative;
+  max-width: 440px;
+  margin: 36px auto;
+  border-radius: 220px 220px 24px 24px;
+  padding: 10px;
+  background: linear-gradient(135deg, #ECCF7A 0%, #FAF5EC 50%, #C5A059 100%);
+  box-shadow: 0 20px 45px rgba(100, 75, 60, 0.2), 0 0 30px rgba(212, 175, 55, 0.25);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.couple-portrait-showcase:hover {
+  transform: translateY(-5px);
+}
+
+.portrait-inner-frame {
+  position: relative;
+  border-radius: 212px 212px 18px 18px;
+  overflow: hidden;
+  border: 4px solid #FAF6EE;
+  background: #FAF6EE;
+}
+
+.couple-portrait-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.couple-portrait-showcase:hover .couple-portrait-img {
+  transform: scale(1.03);
+}
+
+.portrait-overlay-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(50, 30, 20, 0.3) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.portrait-caption-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(253, 251, 247, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(197, 160, 89, 0.45);
+  padding: 8px 22px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* Quranic Ayah Quote Card */
+.quranic-blessing-card {
+  max-width: 600px;
+  margin: 30px auto 0;
+  padding: 24px 30px;
+  background: rgba(244, 247, 243, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(194, 212, 191, 0.7);
+  position: relative;
+}
+
+.quranic-arabic-snippet {
+  font-family: var(--font-arabic);
+  font-size: 1.25rem;
+  color: var(--color-sage-800);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.quranic-english-translation {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.quranic-surah-ref {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--color-sage-500);
+  margin-top: 8px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   SECTION 3: EVENT DETAILS (INSHALLAH NIKAH) & COUNTDOWN
+   ========================================================================== */
+.event-details-section {
+  position: relative;
+}
+
+.event-badge-tag {
+  display: inline-block;
+  background: var(--color-blush-100);
+  border: 1px solid var(--color-blush-200);
+  color: var(--color-blush-deep);
+  padding: 6px 20px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.ceremony-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  color: var(--color-text-main);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.ceremony-title span {
+  color: var(--color-gold-rich);
+  font-style: italic;
+}
+
+.ceremony-datetime-card {
+  max-width: 540px;
+  margin: 0 auto;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #FAF5EC 100%);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  border-radius: 18px;
+  padding: 28px 24px;
+  box-shadow: 0 10px 30px rgba(110, 83, 67, 0.08);
+}
+
+.event-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-blush-deep);
+  font-weight: 600;
+}
+
+.event-time-row {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--color-gold-burnished);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.ceremony-notes {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Countdown Timer */
+.countdown-container {
+  margin: 36px auto 24px;
+  max-width: 580px;
+}
+
+.countdown-headline {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.countdown-box {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 14px;
+  padding: 14px 8px;
+  box-shadow: 0 4px 15px rgba(100, 75, 60, 0.06);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.countdown-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-gold-rich);
+}
+
+.countdown-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-blush-deep);
+  line-height: 1;
+}
+
+.countdown-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+/* Save the Date Calendar Actions */
+.calendar-actions-wrap {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-calendar {
+  background: #FAF6EE;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: var(--color-gold-burnished);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.btn-calendar:hover {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.35);
+}
+
+/* ==========================================================================
+   SECTION 4: VENUE & LOCATION SCANNER
+   ========================================================================== */
+.venue-section {
+  position: relative;
+}
+
+.venue-name-headline {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--color-text-main);
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.venue-address-line {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-blush-deep);
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+/* Venue Layout: Map & QR Scanner Split */
+.venue-grid-container {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .venue-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Map Card */
+.venue-map-card {
+  background: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(100, 75, 60, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-embed-wrapper {
+  position: relative;
+  width: 100%;
+  height: 270px;
+}
+
+.map-embed-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.map-card-footer {
+  padding: 16px 20px;
+  background: #FAF6EE;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.map-info-text {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.btn-open-maps {
+  background: var(--gold-gradient);
+  color: #FFFFFF;
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-open-maps:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(197, 160, 89, 0.4);
+}
+
+/* Stylish QR Code Scanner Card */
+.venue-scanner-card {
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #FAF5EC 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(100, 75, 60, 0.08);
+}
+
+.scanner-badge {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ornate QR Frame */
+.qr-frame-box {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  padding: 10px;
+  background: #FAF6EE;
+  border-radius: 16px;
+  border: 2px solid rgba(197, 160, 89, 0.6);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
+  margin-bottom: 14px;
+}
+
+.qr-frame-box::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 1px dashed rgba(197, 160, 89, 0.45);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.venue-qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  background: #FDFBF7;
+}
+
+.scanner-instruction {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  max-width: 220px;
+}
+
+/* ==========================================================================
+   SECTION 5: CLOSING DUA & BLESSINGS
+   ========================================================================== */
+.closing-section {
+  position: relative;
+}
+
+.closing-dua-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.9rem;
+  color: var(--color-gold-dark);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.closing-blessing-quote {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--color-text-main);
+  line-height: 1.8;
+  max-width: 620px;
+  margin: 0 auto;
+  font-weight: 500;
+}
+
+.closing-cherish-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-blush-deep);
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   FOOTER & COMPLIMENTS
+   ========================================================================== */
+.invitation-footer-card {
+  margin-top: 50px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+  text-align: center;
+}
+
+.compliments-pre {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold-burnished);
+  margin-bottom: 8px;
+}
+
+.compliments-family {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-text-main);
+  letter-spacing: 0.05em;
+}
+
+.compliments-detail {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+/* Guest Interactive Action Hub (RSVP & Share) */
+.guest-action-hub {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.btn-hub-action {
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-whatsapp-share {
+  background: #25D366;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp-share:hover {
+  background: #20BA5A;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 211, 102, 0.45);
+}
+
+
+
+/* Toast Notification */
+.toast-notice {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  background: rgba(46, 35, 28, 0.95);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1100;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+}
+
+.toast-notice.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET OPTIMIZATIONS)
+   ========================================================================== */
+@media (max-width: 600px) {
+  .hero-envelope-stage {
+    min-height: 100svh;
+    height: 100svh;
+    padding: 14px 12px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .envelope-intro-text {
+    margin: 6px 0 10px;
+  }
+
+  .envelope-intro-text .wedding-invite-of-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.16em;
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  /* Full Screen Envelope on Mobile Viewport */
+  .envelope-wrapper {
+    width: 92vw;
+    max-width: 420px;
+    height: 66vh;
+    max-height: 520px;
+    margin: auto 0;
+    filter: drop-shadow(0 20px 35px rgba(90, 65, 50, 0.28));
+  }
+
+  .envelope-nested-card {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+    padding: 10px;
+  }
+
+  .nested-card-names {
+    font-size: 1.8rem;
+  }
+
+  .nested-card-bismillah {
+    font-size: 1.1rem;
+  }
+
+  .wax-seal-img {
+    width: 82px;
+    height: 82px;
+  }
+
+  .open-invite-action {
+    margin-top: 10px;
+    margin-bottom: 6px;
+  }
+
+  .btn-open-envelope {
+    padding: 12px 28px;
+    font-size: 0.82rem;
+  }
+
+  .hero-envelope-stage.opened .envelope-nested-card {
+    animation: card-reveal-center-closer-mobile 3.6s cubic-bezier(0.18, 0.9, 0.25, 1) forwards;
+    z-index: 20;
+  }
+
+  .hero-envelope-stage.opened .envelope-nested-card:hover {
+    transform: translate3d(0, -4%, 55px) scale(1.12);
+  }
+
+  @keyframes card-reveal-center-closer-mobile {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      z-index: 3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    26% {
+      transform: translate3d(0, -22%, 10px) scale(1.02);
+      z-index: 3;
+    }
+    32% {
+      z-index: 20;
+    }
+    68% {
+      transform: translate3d(0, -8%, 30px) scale(1.07);
+      z-index: 20;
+      box-shadow: 
+        0 0 35px rgba(255, 245, 210, 0.95),
+        0 0 65px rgba(236, 207, 122, 0.7),
+        0 15px 35px rgba(100, 75, 60, 0.22);
+    }
+    100% {
+      transform: translate3d(0, -4%, 45px) scale(1.10);
+      z-index: 20;
+      box-shadow: 
+        0 0 45px rgba(255, 245, 210, 0.98),
+        0 0 80px rgba(236, 207, 122, 0.75),
+        0 20px 45px rgba(100, 75, 60, 0.25);
+      filter: brightness(1.08) contrast(1.03);
+    }
+  }
+
+  .card-revealed-hint {
+    margin-top: 14px;
+    margin-bottom: 8px;
+  }
+
+  .btn-scroll-to-details {
+    padding: 10px 22px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  .bride-name, .groom-name {
+    font-size: 3rem;
+  }
+
+  .ceremony-title {
+    font-size: 2.2rem;
+  }
+
+  .event-date-row {
+    font-size: 1.4rem;
+  }
+
+  .countdown-grid {
+    gap: 8px;
+  }
+
+  .countdown-number {
+    font-size: 1.5rem;
+  }
+
+  .bismillah-arabic {
+    font-size: 2rem;
+  }
+
+  .welcome-blessing-text, .closing-blessing-quote {
+    font-size: 1.15rem;
+  }
+
+  .audio-toggle-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+}

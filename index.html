@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Wedding Invitation | Tasnim Kousar &amp; Sadaf</title>
+  
+  <!-- SEO & Social Meta (WhatsApp, Facebook, Twitter) -->
+  <meta name="description" content="In the name of Almighty Allah. You are cordially invited to celebrate the Nikah of Tasnim Kousar and Sadaf on Sunday, 22nd November 2026 at The White Palace, Hubli.">
+  <meta property="og:title" content="Tasnim Kousar Weds Sadaf - Wedding Invitation">
+  <meta property="og:description" content="Inshallah Nikah on Sunday, 22nd November 2026 at The White Palace, Gudihal Road, Hubli. With best compliments from Doddamani family.">
+  <meta property="og:image" content="assets/couple_portrait.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#FAF6EE">
+
+  <!-- Google Fonts: Script, Serif, Display & Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons for polished luxury UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Falling Rose Petals & Gold Dust Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Background Audio Element -->
+  <audio id="bgAudioElement" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Audio Toggle Pill -->
+  <button id="audioToggleBtn" class="audio-toggle-btn" aria-label="Toggle wedding music">
+    <div class="audio-equalizer">
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+    </div>
+    <span id="audioToggleText">Play Music</span>
+  </button>
+
+  <!-- Top Controls Bar -->
+  <aside class="envelope-controls-bar" aria-label="Quick Actions">
+    <button id="btnReplayEnvelope" class="btn-pill-icon" title="Replay Envelope Animation">
+      <i class="fa-solid fa-envelope"></i>
+      <span>Re-seal Envelope</span>
+    </button>
+  </aside>
+
+  <!-- =======================================================================
+       HERO SECTION: 3D LUXURY DIGITAL ENVELOPE
+       ======================================================================= -->
+  <header class="hero-envelope-stage" id="heroEnvelopeStage">
+    
+    <div class="envelope-intro-text">
+      <h1 class="wedding-invite-of-title">Wedding Invitation of</h1>
+    </div>
+
+    <!-- 3D Realistic Envelope -->
+    <div class="envelope-wrapper" id="envelopeWrapper" title="Click or tap to open the royal invitation">
+      
+      <!-- Envelope Back Base -->
+      <div class="envelope-back"></div>
+      
+      <!-- Interior Pattern Liner -->
+      <div class="envelope-liner"></div>
+
+      <!-- INTENSE INNER RADIANCE (Emits bright golden-white light from inside the envelope cavity) -->
+      <div class="envelope-inner-radiance" id="envelopeInnerRadiance"></div>
+      
+      <!-- VOLUMETRIC LIGHT BEAMS (Shoot upward from inside the envelope opening) -->
+      <div class="envelope-light-shafts" id="envelopeLightShafts"></div>
+
+      <!-- The Invitation Card Nested Inside (Centers & moves closer in 3D) -->
+      <div class="envelope-nested-card" id="envelopeNestedCard" role="button" aria-label="Wedding invitation card of Tasnim Kousar and Sadaf" tabindex="0">
+        <div class="nested-card-inner">
+          <div class="card-light-sheen"></div>
+          <div class="nested-card-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <div class="nested-card-pretitle">Wedding Invitation</div>
+          <div class="nested-card-names">Tasnim Kousar &amp; Sadaf</div>
+          <div class="nested-card-date">Sunday • 22nd November 2026</div>
+          <div class="nested-card-venue">The White Palace, Hubli</div>
+          <div class="nested-card-flourish">❦ ✦ ❦</div>
+        </div>
+      </div>
+
+      <!-- Lip Glow Line (Where bright light spills over the inner pocket edge) -->
+      <div class="envelope-pocket-lip-glow"></div>
+
+      <!-- Left & Right Folded Flaps -->
+      <div class="envelope-pocket-left"></div>
+      <div class="envelope-pocket-right"></div>
+      
+      <!-- Bottom Folded Flap -->
+      <div class="envelope-pocket-bottom"></div>
+
+      <!-- Top Flap (Opens 180° upward in 3D in slow motion) -->
+      <div class="envelope-flap-top" id="envelopeFlapTop">
+        <div class="flap-inner-glow"></div>
+      </div>
+
+      <!-- Custom Metallic Gold Wax Seal (T & S Crest with slow-motion break & flash) -->
+      <div class="wax-seal-wrapper" id="waxSealWrapper" role="button" aria-label="Break gold wax seal to open invitation" tabindex="0">
+        <div class="seal-break-flash"></div>
+        <img src="assets/wax_seal_transparent.png" alt="Gold Wax Seal T & S" class="wax-seal-img">
+      </div>
+
+    </div>
+
+    <!-- Initial Action Prompt -->
+    <div class="open-invite-action" id="openInviteAction">
+      <button class="btn-open-envelope" id="btnOpenEnvelope">
+        <i class="fa-solid fa-envelope-open-text"></i>
+        <span>Tap to Open Invitation</span>
+      </button>
+      <div class="scroll-hint">
+        <span>or scroll down to reveal</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <!-- Centered Card Navigation Prompt (Fades in once card is centered & closer) -->
+    <div class="card-revealed-hint" id="cardRevealedHint">
+      <button class="btn-scroll-to-details" id="btnScrollToDetails">
+        <span>View Full Celebration &amp; Venue</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================================
+       MAIN INVITATION CARD DISPLAY
+       ======================================================================= -->
+  <main class="main-invitation-container" id="invitationCard">
+    <article class="royal-card-surface">
+      
+      <!-- Hanging Floral Arch Header (Blush pink roses, jasmine, eucalyptus & gold) -->
+      <header class="floral-arch-header-wrap">
+        <img src="assets/floral_arch.jpg" alt="Luxury hanging floral arch with blush roses and gold foliage" class="floral-arch-img">
+        <div class="floral-arch-gradient-blend"></div>
+      </header>
+
+      <div class="card-content-body">
+
+        <!-- ===================================================================
+             SECTION 1: BISMILLAH & DIVINE BLESSING (WELCOME)
+             =================================================================== -->
+        <section class="invitation-section section-welcome" id="sectionWelcome">
+          
+          <div class="bismillah-calligraphy-wrap">
+            <div class="bismillah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <p class="bismillah-translation">
+              “In the name of Almighty Allah, the Most Beneficent and the Most Merciful”
+            </p>
+          </div>
+
+          <div class="ornate-gold-divider">
+            <span class="ornate-divider-line"></span>
+            <span class="ornate-divider-symbol">❦ ✦ ❦</span>
+            <span class="ornate-divider-line"></span>
+          </div>
+
+          <p class="welcome-blessing-text">
+            With the blessings of Allah (SWT) and <span class="host-name">Mr. Mohammad Shafi Doddamani</span>, 
+            we joyfully request the honour of your esteemed presence and heartfelt Duas to celebrate the auspicious Nikah ceremony of our beloved daughter.
+          </p>
+
+        </section>
+
+        <!-- ===================================================================
+             SECTION 2: THE COUPLE & CENTERPIECE PORTRAIT
+             =================================================================== -->
+        <section class="invitation-section section-couple" id="sectionCouple">
+          
+          <header class="couple-announcement-header">
+            <div class="couple-prelude">Together With Their Families</div>
+            <div class="couple-names-wrap">
+              <h2 class="bride-name">Tasnim Kousar</h2>
+              <div class="weds-conjunction">Weds</div>
+              <h2 class="groom-name">Sadaf</h2>
+            </div>
+            <div class="groom-parentage">
+              (S/o <strong>Mr. Abdul Tawab Kodiyal</strong>, Kumta Road, Sirsi)
+            </div>
+          </header>
+
+          <!-- Centerpiece Couple Portrait in Mughal Royal Arch Frame -->
+          <figure class="couple-portrait-showcase">
+            <div class="portrait-inner-frame">
+              <img src="assets/couple_portrait.jpg" alt="Artistic portrait of Tasnim Kousar in blush-pink bridal hijab and Sadaf in coordinating blush-pink sherwani" class="couple-portrait-img">
+              <div class="portrait-overlay-glow"></div>
+              <figcaption class="portrait-caption-tag">
+                <i class="fa-solid fa-heart" style="color: #DF7E8B; margin-right: 5px;"></i>
+                Tasnim &amp; Sadaf
+              </figcaption>
+            </div>
+          </figure>
+
+          <!-- Quranic Blessing Card -->
+          <div class="quranic-blessing-card">
+            <div class="quranic-arabic-snippet">
+              وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+            </div>
+            <p class="quranic-english-translation">
+              “And among His signs is that He created for you mates from among yourselves, that you may find tranquility in them; and He placed between you affection and mercy.”
+            </p>
+            <div class="quranic-surah-ref">— Surah Ar-Rum [30:21] —</div>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SECTION 3: EVENT DETAILS (INSHALLAH NIKAH) & COUNTDOWN
+             =================================================================== -->
+        <section class="invitation-section section-event" id="sectionEvent">
+          
+          <div class="event-badge-tag">The Blessed Union</div>
+          
+          <h2 class="ceremony-title">
+            <span>Inshallah</span> Nikah
+          </h2>
+
+          <div class="ceremony-datetime-card">
+            <div class="event-date-row">
+              <i class="fa-regular fa-calendar-days" style="color: #C5A059;"></i>
+              <span>Sunday, 22nd November 2026</span>
+            </div>
+            <div class="event-time-row">
+              <i class="fa-regular fa-clock" style="margin-right: 6px;"></i>
+              12:45 PM
+            </div>
+            <p class="ceremony-notes">
+              Followed by Dawat-e-Walima and celebration
+            </p>
+          </div>
+
+          <!-- Live Countdown Timer -->
+          <div class="countdown-container">
+            <div class="countdown-headline">Counting Down to the Blessed Moment</div>
+            <div class="countdown-grid">
+              <div class="countdown-box">
+                <div class="countdown-number" id="countDays">00</div>
+                <div class="countdown-label">Days</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-number" id="countHours">00</div>
+                <div class="countdown-label">Hours</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-number" id="countMinutes">00</div>
+                <div class="countdown-label">Minutes</div>
+              </div>
+              <div class="countdown-box">
+                <div class="countdown-number" id="countSeconds">00</div>
+                <div class="countdown-label">Seconds</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save the Date Calendar Actions -->
+          <div class="calendar-actions-wrap">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Tasnim+Kousar+Weds+Sadaf+(Nikah)&dates=20261122T071500Z/20261122T103000Z&details=Inshallah+Nikah+ceremony+of+Tasnim+Kousar+and+Sadaf+(S/o+Mr.+Abdul+Tawab+Kodiyal).+Venue:+The+White+Palace,+Gudihal+Road,+Hubli.+With+best+compliments+from+Doddamani+family.&location=The+White+Palace,+Gudihal+Road,+Hubli" target="_blank" rel="noopener noreferrer" class="btn-calendar">
+              <i class="fa-brands fa-google"></i>
+              <span>Add to Google Calendar</span>
+            </a>
+            <a href="#" id="btnDownloadIcal" class="btn-calendar">
+              <i class="fa-solid fa-calendar-plus"></i>
+              <span>Download iCal (.ics)</span>
+            </a>
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SECTION 4: VENUE & LOCATION SCANNER
+             =================================================================== -->
+        <section class="invitation-section section-venue" id="sectionVenue">
+          
+          <div class="ornate-gold-divider">
+            <span class="ornate-divider-line"></span>
+            <span class="ornate-divider-symbol">⚜ ✦ ⚜</span>
+            <span class="ornate-divider-line"></span>
+          </div>
+
+          <h2 class="venue-name-headline">The White Palace</h2>
+          <p class="venue-address-line">
+            <i class="fa-solid fa-location-dot" style="margin-right: 6px; color: #DF7E8B;"></i>
+            Gudihal Road, Hubli, Karnataka
+          </p>
+
+          <div class="venue-grid-container">
+            
+            <!-- Interactive Google Maps Card -->
+            <div class="venue-map-card">
+              <div class="map-embed-wrapper">
+                <iframe 
+                  title="Venue Google Maps Location"
+                  src="https://maps.google.com/maps?q=The%20White%20Palace,%20Gudihal%20Road,%20Hubli&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+              </div>
+              <div class="map-card-footer">
+                <div class="map-info-text">
+                  <strong>The White Palace</strong><br>
+                  Gudihal Road, Hubli
+                </div>
+                <a href="https://maps.google.com/?q=The+White+Palace+Gudihal+Road+Hubli" target="_blank" rel="noopener noreferrer" class="btn-open-maps">
+                  <i class="fa-solid fa-diamond-turn-right"></i>
+                  <span>Get Directions</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Stylishly Framed QR Code Scanner -->
+            <div class="venue-scanner-card">
+              <div class="scanner-badge">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Instant Location Scanner</span>
+              </div>
+              <div class="qr-frame-box">
+                <img src="assets/venue_qr.png" alt="QR Code Scanner for Google Maps Location of The White Palace Hubli" class="venue-qr-img">
+              </div>
+              <p class="scanner-instruction">
+                Scan with your smartphone camera for instant turn-by-turn navigation.
+              </p>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ===================================================================
+             SECTION 5: CLOSING DUAS & BLESSINGS
+             =================================================================== -->
+        <section class="invitation-section section-closing" id="sectionClosing">
+          
+          <div class="closing-dua-arabic">
+            بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
+          </div>
+
+          <p class="closing-blessing-quote">
+            “Your presence will add to our joy and your Duas will be cherished forever. May Allah (SWT) bless the couple with abundant love, barakah, and perpetual happiness in this life and the hereafter.”
+          </p>
+
+          <p class="closing-cherish-text">
+            Awaiting your gracious presence to bless the newlyweds
+          </p>
+
+        </section>
+
+        <!-- ===================================================================
+             FOOTER & COMPLIMENTS
+             =================================================================== -->
+        <footer class="invitation-footer-card">
+          
+          <div class="compliments-pre">With Best Compliments From:</div>
+          <div class="compliments-family">Doddamani Family</div>
+          <div class="compliments-detail">Relatives and Friends</div>
+
+          <!-- Guest Action Hub (WhatsApp Share) -->
+          <div class="guest-action-hub">
+            <button class="btn-hub-action btn-whatsapp-share" id="btnShareWhatsapp">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Share Invitation via WhatsApp</span>
+            </button>
+          </div>
+
+        </footer>
+
+      </div>
+    </article>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toastNotice" class="toast-notice"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
