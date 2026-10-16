@@ -191,15 +191,19 @@
           </header>
 
           <!-- Centerpiece Couple Portrait in Mughal Royal Arch Frame -->
-          <figure class="couple-portrait-showcase">
+          <figure class="couple-portrait-showcase" id="couplePortraitShowcase" role="button" aria-label="Tap to celebrate and bless Tasnim and Sadaf" tabindex="0">
             <div class="portrait-inner-frame">
-              <img src="assets/couple_portrait.jpg?v=2" alt="Artistic portrait of Tasnim Kousar in blush-pink bridal hijab and Sadaf in coordinating blush-pink sherwani" class="couple-portrait-img">
+              <img src="assets/couple_portrait.jpg?v=2" alt="Artistic portrait of Tasnim Kousar in blush-pink bridal hijab and Sadaf in coordinating blush-pink sherwani" class="couple-portrait-img" id="couplePortraitImg">
+              <div class="portrait-light-gleam" id="portraitLightGleam"></div>
               <div class="portrait-overlay-glow"></div>
               <figcaption class="portrait-caption-tag">
                 <i class="fa-solid fa-heart" style="color: #DF7E8B; margin-right: 5px;"></i>
-                Tasnim &amp; Sadaf
+                <span>Tasnim &amp; Sadaf</span>
+                <span class="tap-to-bless-hint">• Tap to Bless ✨</span>
               </figcaption>
             </div>
+            <!-- Floating Celebration Particle Container -->
+            <div class="portrait-celebration-fx" id="portraitCelebrationFx"></div>
           </figure>
 
           <!-- Quranic Blessing Card -->

@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initAudioPlayer();
   initCalendarAndShare();
+  initPortraitCelebration();
 });
 
 /* ==========================================================================
@@ -548,4 +549,131 @@ function escapeHtml(str) {
   return str.replace(/[&<>'"]/g, 
     tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
   );
+}
+
+/* ==========================================================================
+   8. INTERACTIVE COUPLE PORTRAIT CELEBRATION ANIMATION
+   ========================================================================== */
+function initPortraitCelebration() {
+  const showcase = document.getElementById('couplePortraitShowcase');
+  const fxContainer = document.getElementById('portraitCelebrationFx');
+  if (!showcase || !fxContainer) return;
+
+  const blessings = [
+    '✨ MashaAllah! ✨',
+    '💖 BarakAllah! 💖',
+    '🌸 Lots of Duas! 🌸',
+    '🤲 May Allah Bless Them! 🤲',
+    '💍 Tasnim & Sadaf 💍',
+    '🤍 Shadi Mubarak! 🤍'
+  ];
+  let blessingIndex = 0;
+
+  function triggerCelebration(e) {
+    // 1. Re-trigger the pulse and gleam animation on the frame
+    showcase.classList.remove('celebrating');
+    void showcase.offsetWidth; // Force DOM reflow to restart CSS animation cleanly
+    showcase.classList.add('celebrating');
+
+    // 2. Play gentle royal chime sound via Web Audio
+    playRoyalChimeSound();
+
+    // 3. Determine origin coordinates for the particle burst
+    const rect = showcase.getBoundingClientRect();
+    let clientX = rect.left + rect.width / 2;
+    let clientY = rect.top + rect.height * 0.45;
+
+    if (e && e.clientX && e.clientY) {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    const localX = clientX - rect.left;
+    const localY = clientY - rect.top;
+
+    // 4. Spawn floating celebration particles (hearts, petals, sparkles)
+    const particleIcons = ['✨', '💖', '🌸', '🤍', '💍', '❦', '✦', '💐'];
+    const particleCount = 14;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('span');
+      particle.className = 'floating-celebration-particle';
+      particle.innerText = particleIcons[Math.floor(Math.random() * particleIcons.length)];
+
+      const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.6;
+      const distance = Math.random() * 90 + 60;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance - 80; // drift upward
+      const rot = (Math.random() - 0.5) * 90 + 'deg';
+
+      particle.style.left = `${localX}px`;
+      particle.style.top = `${localY}px`;
+      particle.style.setProperty('--dx', `${dx}px`);
+      particle.style.setProperty('--dy', `${dy}px`);
+      particle.style.setProperty('--rot', rot);
+      particle.style.fontSize = `${Math.random() * 0.7 + 1.25}rem`;
+
+      fxContainer.appendChild(particle);
+
+      setTimeout(() => {
+        if (particle.parentNode) particle.parentNode.removeChild(particle);
+      }, 1600);
+    }
+
+    // 5. Spawn floating blessing banner
+    const banner = document.createElement('div');
+    banner.className = 'blessing-popup-banner';
+    banner.innerText = blessings[blessingIndex % blessings.length];
+    blessingIndex++;
+    fxContainer.appendChild(banner);
+
+    setTimeout(() => {
+      if (banner.parentNode) banner.parentNode.removeChild(banner);
+    }, 1600);
+  }
+
+  showcase.addEventListener('click', (e) => {
+    triggerCelebration(e);
+  });
+
+  showcase.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      triggerCelebration();
+    }
+  });
+}
+
+function playRoyalChimeSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+
+    // Pentatonic romantic harp arpeggio: C5, E5, G5, C6, E6
+    const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+
+    freqs.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      const startTime = ctx.currentTime + idx * 0.07;
+      const duration = 0.85;
+
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.08, startTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + duration + 0.05);
+    });
+  } catch (err) {
+    // Audio context may be restricted by browser autoplay policy
+  }
 }
