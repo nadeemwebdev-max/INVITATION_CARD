@@ -456,19 +456,10 @@ function startSynthesizedMelody() {
 }
 
 /* ==========================================================================
-   6. CALENDAR (GOOGLE & ICAL .ICS) & SHARING
+   6. SHARING & CALENDAR INTEGRATION
    ========================================================================== */
 function initCalendarAndShare() {
-  const btnIcal = document.getElementById('btnDownloadIcal');
   const btnShareWhatsapp = document.getElementById('btnShareWhatsapp');
-
-  // iCal .ics file download generator
-  if (btnIcal) {
-    btnIcal.addEventListener('click', (e) => {
-      e.preventDefault();
-      downloadIcsFile();
-    });
-  }
 
   // WhatsApp share button
   if (btnShareWhatsapp) {
@@ -491,38 +482,6 @@ function initCalendarAndShare() {
       window.open(whatsappUrl, '_blank');
     });
   }
-}
-
-function downloadIcsFile() {
-  const icsContent = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Doddamani Family//Wedding Invitation//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    'UID:wedding-tasnim-sadaf-20261122@invitation',
-    'DTSTAMP:20261015T120000Z',
-    'DTSTART:20261122T071500Z', // 12:45 PM IST is 07:15 AM UTC
-    'DTEND:20261122T113000Z',
-    'SUMMARY:Nikah: Tasnim Kousar & Sadaf',
-    'DESCRIPTION:Inshallah Nikah ceremony of Tasnim Kousar and Sadaf (S/o Mr. Abdul Tawab Kodiyal). Venue: The White Palace, Gudihal Road, Hubli. With best compliments from Doddamani family.',
-    'LOCATION:The White Palace, Gudihal Road, Hubli',
-    'STATUS:CONFIRMED',
-    'SEQUENCE:0',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-
-  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.setAttribute('download', 'Tasnim_Kousar_Weds_Sadaf_Nikah.ics');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  showToast('📅 Calendar event downloaded!');
 }
 
 

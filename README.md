@@ -23,7 +23,7 @@ A luxurious, single-page, scroll-animated Indian Muslim wedding invitation websi
   - **The Couple:** Gold calligraphy announcing *Tasnim Kousar Weds Sadaf (S/o Mr. Abdul Tawab Kodiyal, Kumta Road, Sirsi)*.
   - **Nikah Ceremony:** *Sunday, 22nd November 2026 at 12:45 PM*.
   - **Live Countdown:** Real-time countdown timer to the auspicious Nikah moment.
-  - **Calendar Integration:** One-click "Add to Google Calendar" and iCal (`.ics`) download.
+  - **Calendar Integration:** One-click "Add to Google Calendar" button.
   - **Venue & Scanner:** *The White Palace, Gudihal Road, Hubli* with interactive Google Maps embed and a gold-framed QR code scanner for instant mobile navigation.
   - **Dua & Compliments:** Closing blessings from the Doddamani family, relatives, and friends.
 
