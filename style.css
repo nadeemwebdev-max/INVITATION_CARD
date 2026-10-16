@@ -879,6 +879,7 @@ body::before {
   width: 100%;
   overflow: hidden;
   line-height: 0;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15);
 }
 
 .floral-arch-img {
@@ -897,9 +898,7 @@ body::before {
 .floral-arch-gradient-blend {
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(ellipse at 50% 65%, rgba(255, 255, 255, 0.65) 0%, transparent 68%),
-    linear-gradient(to bottom, transparent 25%, rgba(250, 246, 238, 0.75) 68%, var(--color-cream-card) 98%);
+  background: linear-gradient(to bottom, rgba(253, 251, 247, 0) 65%, var(--color-cream-card) 100%);
   pointer-events: none;
 }
 
@@ -908,15 +907,13 @@ body::before {
    ========================================================================== */
 .card-content-body {
   position: relative;
-  padding: 0 40px 10px;
-  margin-top: -275px; /* Nestles Bismillah and divine blessing directly inside floral arch */
+  padding: 30px 40px 10px;
   z-index: 15;
 }
 
 @media (max-width: 600px) {
   .card-content-body {
-    padding: 0 16px 10px;
-    margin-top: -125px; /* Seamless fit for mobile screen arch */
+    padding: 20px 20px 10px;
   }
 }
 
@@ -960,39 +957,19 @@ body::before {
 /* ==========================================================================
    SECTION 1: BISMILLAH & WELCOME BLESSINGS
    ========================================================================== */
-.arch-apex-motif {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 6px;
-  color: var(--color-gold-rich);
-  opacity: 0.88;
-}
-
-.arch-apex-star {
-  font-size: 0.8rem;
-  color: var(--color-gold-burnished);
-}
-
-.arch-apex-flourish {
-  font-size: 1.25rem;
-  color: var(--color-gold-rich);
-}
-
 .bismillah-calligraphy-wrap {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .bismillah-arabic {
   font-family: var(--font-arabic);
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1.4;
   color: var(--color-gold-dark);
   background: var(--gold-text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 4px rgba(110, 83, 32, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(147, 115, 48, 0.15));
   display: inline-block;
 }
 
@@ -1000,11 +977,10 @@ body::before {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.15rem;
-  color: var(--color-sage-800);
+  color: var(--color-text-muted);
   max-width: 580px;
-  margin: 6px auto 0;
+  margin: 8px auto 0;
   line-height: 1.6;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
 }
 
 .welcome-blessing-text {
@@ -1013,9 +989,8 @@ body::before {
   color: var(--color-text-main);
   line-height: 1.8;
   max-width: 650px;
-  margin: 16px auto 0;
+  margin: 18px auto 0;
   font-weight: 500;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
 .host-name {
