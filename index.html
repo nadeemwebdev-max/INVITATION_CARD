@@ -33,6 +33,9 @@
     <source src="assets/music.mp3?v=2" type="audio/mpeg">
   </audio>
 
+  <!-- Slim Gold Tour Progress Bar at Viewport Top -->
+  <div class="guide-progress-bar" id="guideProgressBar"></div>
+
   <!-- Floating Audio Toggle Pill -->
   <button id="audioToggleBtn" class="audio-toggle-btn" aria-label="Toggle wedding music">
     <div class="audio-equalizer">
@@ -42,6 +45,15 @@
     </div>
     <span id="audioToggleText">Play Music</span>
   </button>
+
+  <!-- Floating Auto-Guide Tour Controller (Bottom Left) -->
+  <div class="auto-guide-controller" id="autoGuideController" aria-label="Auto-guide invitation tour">
+    <button id="btnGuideToggle" class="btn-guide-toggle" title="Auto-guide through wedding invitation">
+      <i class="fa-solid fa-compass" id="guideToggleIcon"></i>
+      <span id="guideToggleText">Auto-Guide</span>
+      <span class="guide-step-chip" id="guideStepChip">1/5</span>
+    </button>
+  </div>
 
   <!-- Top Controls Bar -->
   <aside class="envelope-controls-bar" aria-label="Quick Actions">
@@ -126,7 +138,8 @@
     <!-- Centered Card Navigation Prompt (Fades in once card is centered & closer) -->
     <div class="card-revealed-hint" id="cardRevealedHint">
       <button class="btn-scroll-to-details" id="btnScrollToDetails">
-        <span>View Full Celebration &amp; Venue</span>
+        <i class="fa-solid fa-compass" style="color: var(--color-gold-burnished); margin-right: 4px;"></i>
+        <span>Auto-Guide Through Card</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
     </div>

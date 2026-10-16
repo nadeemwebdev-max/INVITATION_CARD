@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAudioPlayer();
   initCalendarAndShare();
   initPortraitCelebration();
+  initAutoGuide();
 });
 
 /* ==========================================================================
@@ -42,13 +43,20 @@ function initEnvelope() {
     // Attempt to start soft background music
     tryPlayMusic();
 
-    // The card remains centered and closer for guests to view up close.
-    // Guests can click the view details button or scroll down when ready.
+    // Show floating auto-guide controller pill
+    showAutoGuideController();
+
+    // Automatically guide the user through the card after the centered card is revealed
+    autoGuideTimer = setTimeout(() => {
+      startAutoGuide(0);
+    }, 4200);
   }
 
   function resetEnvelope() {
     isEnvelopeOpened = false;
     stage.classList.remove('opened');
+    stopAutoGuide();
+    hideAutoGuideController();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -58,8 +66,11 @@ function initEnvelope() {
   if (btnReplay) btnReplay.addEventListener('click', resetEnvelope);
   if (btnScrollToDetails) {
     btnScrollToDetails.addEventListener('click', () => {
-      const cardSection = document.getElementById('invitationCard');
-      if (cardSection) cardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!isAutoGuiding) {
+        startAutoGuide(0);
+      } else {
+        pauseAutoGuide(true);
+      }
     });
   }
   if (nestedCard) {
@@ -67,8 +78,11 @@ function initEnvelope() {
       if (!isEnvelopeOpened) {
         openEnvelope();
       } else {
-        const cardSection = document.getElementById('invitationCard');
-        if (cardSection) cardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!isAutoGuiding) {
+          startAutoGuide(0);
+        } else {
+          pauseAutoGuide(true);
+        }
       }
     });
   }
@@ -634,5 +648,201 @@ function playRoyalChimeSound() {
     });
   } catch (err) {
     // Audio context may be restricted by browser autoplay policy
+  }
+}
+
+/* ==========================================================================
+   9. CINEMATIC AUTO-GUIDE ANIMATION ENGINE
+   ========================================================================== */
+let isAutoGuiding = false;
+let currentGuideIndex = 0;
+let guideStepTimeout = null;
+let autoGuideTimer = null;
+
+const guideChapters = [
+  { id: 'sectionWelcome', label: '1/5 Divine Blessing', pause: 4200 },
+  { id: 'sectionCouple', label: '2/5 The Royal Couple', pause: 4800, onEnter: () => triggerPortraitCelebrationFromGuide() },
+  { id: 'sectionEvent', label: '3/5 Nikah Details', pause: 4200 },
+  { id: 'sectionVenue', label: '4/5 Venue & Directions', pause: 4600 },
+  { id: 'sectionClosing', label: '5/5 Duas & Compliments', pause: 4200 }
+];
+
+function initAutoGuide() {
+  const btnToggle = document.getElementById('btnGuideToggle');
+  if (btnToggle) {
+    btnToggle.addEventListener('click', () => {
+      if (isAutoGuiding) {
+        pauseAutoGuide(true);
+      } else {
+        startAutoGuide(currentGuideIndex);
+      }
+    });
+  }
+
+  // Gracefully pause auto-guide when user manually wheels or touches screen
+  window.addEventListener('wheel', (e) => {
+    if (isAutoGuiding && Math.abs(e.deltaY) > 8) {
+      pauseAutoGuide(true);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', () => {
+    if (isAutoGuiding) {
+      pauseAutoGuide(true);
+    }
+  }, { passive: true });
+}
+
+function showAutoGuideController() {
+  const ctrl = document.getElementById('autoGuideController');
+  if (ctrl) ctrl.classList.add('visible');
+}
+
+function hideAutoGuideController() {
+  const ctrl = document.getElementById('autoGuideController');
+  if (ctrl) ctrl.classList.remove('visible');
+}
+
+function startAutoGuide(fromIndex = 0) {
+  if (autoGuideTimer) clearTimeout(autoGuideTimer);
+  if (guideStepTimeout) clearTimeout(guideStepTimeout);
+
+  if (fromIndex >= guideChapters.length) {
+    fromIndex = 0;
+  }
+
+  isAutoGuiding = true;
+  currentGuideIndex = fromIndex;
+  showAutoGuideController();
+
+  const btnToggle = document.getElementById('btnGuideToggle');
+  if (btnToggle) btnToggle.classList.add('guiding');
+
+  executeGuideStep(currentGuideIndex);
+}
+
+function executeGuideStep(index) {
+  if (!isAutoGuiding || index >= guideChapters.length) {
+    finishAutoGuide();
+    return;
+  }
+
+  currentGuideIndex = index;
+  const step = guideChapters[index];
+  const el = document.getElementById(step.id);
+
+  // Update Progress Bar at Viewport Top
+  const progressBar = document.getElementById('guideProgressBar');
+  if (progressBar) {
+    progressBar.classList.add('active');
+    const pct = ((index + 1) / guideChapters.length) * 100;
+    progressBar.style.width = `${pct}%`;
+  }
+
+  // Update Floating Controller Button
+  const stepChip = document.getElementById('guideStepChip');
+  if (stepChip) stepChip.innerText = `${index + 1}/${guideChapters.length}`;
+  const toggleText = document.getElementById('guideToggleText');
+  if (toggleText) toggleText.innerText = 'Pause Guide';
+  const toggleIcon = document.getElementById('guideToggleIcon');
+  if (toggleIcon) toggleIcon.className = 'fa-solid fa-pause';
+
+  // Highlight Section with Golden Focus Shimmer
+  document.querySelectorAll('.invitation-section').forEach(s => s.classList.remove('auto-guide-focus'));
+  if (el) {
+    el.classList.add('auto-guide-focus');
+    el.classList.add('revealed');
+
+    // Smooth cinematic gliding scroll to center the section in the viewport
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Trigger step celebration (e.g. couple portrait pulse)
+    if (step.onEnter) {
+      setTimeout(step.onEnter, 900);
+    }
+  }
+
+  // Schedule Next Step in Tour
+  guideStepTimeout = setTimeout(() => {
+    if (isAutoGuiding) {
+      executeGuideStep(index + 1);
+    }
+  }, step.pause);
+}
+
+function pauseAutoGuide(manual = false) {
+  isAutoGuiding = false;
+  if (guideStepTimeout) clearTimeout(guideStepTimeout);
+  if (autoGuideTimer) clearTimeout(autoGuideTimer);
+
+  const btnToggle = document.getElementById('btnGuideToggle');
+  if (btnToggle) btnToggle.classList.remove('guiding');
+
+  const toggleText = document.getElementById('guideToggleText');
+  if (toggleText) toggleText.innerText = 'Resume Guide';
+  const toggleIcon = document.getElementById('guideToggleIcon');
+  if (toggleIcon) toggleIcon.className = 'fa-solid fa-play';
+
+  document.querySelectorAll('.invitation-section').forEach(s => s.classList.remove('auto-guide-focus'));
+
+  if (manual) {
+    showToast('⏸ Auto-Guide paused. Tap "Resume Guide" anytime!');
+  }
+}
+
+function stopAutoGuide() {
+  isAutoGuiding = false;
+  currentGuideIndex = 0;
+  if (guideStepTimeout) clearTimeout(guideStepTimeout);
+  if (autoGuideTimer) clearTimeout(autoGuideTimer);
+
+  const btnToggle = document.getElementById('btnGuideToggle');
+  if (btnToggle) btnToggle.classList.remove('guiding');
+
+  const progressBar = document.getElementById('guideProgressBar');
+  if (progressBar) {
+    progressBar.classList.remove('active');
+    progressBar.style.width = '0%';
+  }
+
+  const stepChip = document.getElementById('guideStepChip');
+  if (stepChip) stepChip.innerText = `1/5`;
+  const toggleText = document.getElementById('guideToggleText');
+  if (toggleText) toggleText.innerText = 'Auto-Guide';
+  const toggleIcon = document.getElementById('guideToggleIcon');
+  if (toggleIcon) toggleIcon.className = 'fa-solid fa-compass';
+
+  document.querySelectorAll('.invitation-section').forEach(s => s.classList.remove('auto-guide-focus'));
+}
+
+function finishAutoGuide() {
+  isAutoGuiding = false;
+  currentGuideIndex = 0;
+
+  const btnToggle = document.getElementById('btnGuideToggle');
+  if (btnToggle) btnToggle.classList.remove('guiding');
+
+  const toggleText = document.getElementById('guideToggleText');
+  if (toggleText) toggleText.innerText = 'Replay Guide';
+  const toggleIcon = document.getElementById('guideToggleIcon');
+  if (toggleIcon) toggleIcon.className = 'fa-solid fa-rotate-right';
+
+  const progressBar = document.getElementById('guideProgressBar');
+  if (progressBar) {
+    progressBar.style.width = '100%';
+    setTimeout(() => {
+      progressBar.classList.remove('active');
+      progressBar.style.width = '0%';
+    }, 1500);
+  }
+
+  document.querySelectorAll('.invitation-section').forEach(s => s.classList.remove('auto-guide-focus'));
+  showToast('✨ Royal Wedding Invitation tour completed!');
+}
+
+function triggerPortraitCelebrationFromGuide() {
+  const showcase = document.getElementById('couplePortraitShowcase');
+  if (showcase) {
+    showcase.click();
   }
 }
