@@ -28,7 +28,7 @@ A luxurious, single-page, scroll-animated Indian Muslim wedding invitation websi
   - **Dua & Compliments:** Closing blessings from the Doddamani family, relatives, and friends.
 
 - **Audio & Interactivity:**
-  - Background wedding instrumental music with a discreet audio pill toggle and live equalizer bars.
+  - Background Islamic Wedding Nasheed by Muhammad Al Muqit with a discreet audio pill toggle and live equalizer bars.
   - Procedural parchment sound effect upon opening the envelope.
   - WhatsApp 1-click share integration for guests.
 
