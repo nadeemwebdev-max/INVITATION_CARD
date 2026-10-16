@@ -486,7 +486,7 @@ function initCalendarAndShare() {
         `weds\n` +
         `🤵 *Sadaf* (S/o Mr. Abdul Tawab Kodiyal, Kumta Road, Sirsi)\n\n` +
         `📅 *Date:* Sunday, 22nd November 2026\n` +
-        `⏰ *Time:* 12:45 PM Inshallah\n` +
+        `⏰ *Time:* 12:45 PM Inshallah (Followed by Lunch at 1:30 PM)\n` +
         `📍 *Venue:* The White Palace, Gudihal Road, Hubli\n\n` +
         `Directions: https://maps.google.com/?q=The+White+Palace+Gudihal+Road+Hubli\n\n` +
         `Your presence & Duas will add to our joy!\n` +
