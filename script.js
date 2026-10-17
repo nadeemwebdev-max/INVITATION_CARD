@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
    1. ENVELOPE OPEN / CLOSE MECHANICS
    ========================================================================== */
 let isEnvelopeOpened = false;
+let isEnvelopeClosing = false;
 
 function initEnvelope() {
   const stage = document.getElementById('heroEnvelopeStage');
@@ -28,13 +29,14 @@ function initEnvelope() {
   const btnScrollToDetails = document.getElementById('btnScrollToDetails');
 
   function openEnvelope() {
-    if (isEnvelopeOpened) return;
+    if (isEnvelopeOpened || isEnvelopeClosing) return;
     isEnvelopeOpened = true;
 
     // Play realistic paper unfold sound effect via Web Audio
     playParchmentSound();
 
     // Trigger 3D envelope flap opening and card sliding out in slow motion
+    stage.classList.remove('closing');
     stage.classList.add('opened');
 
     // Trigger bright golden radiance sparkles
@@ -53,11 +55,29 @@ function initEnvelope() {
   }
 
   function resetEnvelope() {
+    if (!isEnvelopeOpened || isEnvelopeClosing) return;
+    isEnvelopeClosing = true;
     isEnvelopeOpened = false;
-    stage.classList.remove('opened');
+
+    // Stop auto-guide and hide its controller
     stopAutoGuide();
     hideAutoGuideController();
+
+    // Scroll smoothly to top so user watches the full closing sequence
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Transition from opened to closing to initiate the reverse choreography
+    stage.classList.remove('opened');
+    stage.classList.add('closing');
+
+    // Play tactile paper slide and stamp sound effect
+    playEnvelopeCloseSound();
+
+    // Reset clean state after sequence finishes (2.2s)
+    setTimeout(() => {
+      stage.classList.remove('closing');
+      isEnvelopeClosing = false;
+    }, 2250);
   }
 
   const nestedCard = document.getElementById('envelopeNestedCard');
@@ -433,6 +453,61 @@ function playParchmentSound() {
     oscGain.connect(ctx.destination);
     osc.start();
     osc.stop(ctx.currentTime + 0.8);
+  } catch (err) {
+    // Ignore audio error if unsupported
+  }
+}
+
+// Realistic Web Audio Parchment Slide & Wax Stamp Sound when Envelope Closes
+function playEnvelopeCloseSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+
+    // 1. Soft paper friction sound as card slides into envelope pocket
+    const bufferSize = ctx.sampleRate * 0.8;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (ctx.sampleRate * 0.28));
+    }
+
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(650, ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.75);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.18, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    noise.start();
+
+    // 2. Soft wax seal stamp "thud" at 1.55s as the seal lands and seals
+    setTimeout(() => {
+      try {
+        const stampOsc = ctx.createOscillator();
+        const stampGain = ctx.createGain();
+        stampOsc.type = 'triangle';
+        stampOsc.frequency.setValueAtTime(120, ctx.currentTime);
+        stampOsc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.22);
+
+        stampGain.gain.setValueAtTime(0.2, ctx.currentTime);
+        stampGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+
+        stampOsc.connect(stampGain);
+        stampGain.connect(ctx.destination);
+        stampOsc.start();
+        stampOsc.stop(ctx.currentTime + 0.3);
+      } catch (e) {}
+    }, 1550);
   } catch (err) {
     // Ignore audio error if unsupported
   }

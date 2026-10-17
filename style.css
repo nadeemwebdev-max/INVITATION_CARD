@@ -309,15 +309,14 @@ body::before {
 
 
 
-/* 3D Envelope Wrapper */
+/* 3D Envelope Wrapper (Full Desktop Size) */
 .envelope-wrapper {
   position: relative;
-  width: 480px;
-  max-width: 92vw;
-  height: 330px;
+  width: min(920px, 92vw);
+  height: min(600px, 72vh);
   cursor: pointer;
   user-select: none;
-  filter: drop-shadow(0 25px 40px rgba(90, 65, 50, 0.28));
+  filter: drop-shadow(0 30px 60px rgba(90, 65, 50, 0.35));
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -559,51 +558,51 @@ body::before {
 
 .nested-card-bismillah {
   font-family: var(--font-arabic);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--color-gold-burnished);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   filter: drop-shadow(0 1px 2px rgba(110, 83, 32, 0.15));
 }
 
 .nested-card-pretitle {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-gold-burnished);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 
 .nested-card-names {
   font-family: var(--font-script);
-  font-size: 2.3rem;
+  font-size: 2.75rem;
   color: var(--color-blush-deep);
   line-height: 1.15;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-shadow: 0 1px 3px rgba(158, 75, 86, 0.15);
 }
 
 .nested-card-date {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 1.18rem;
   letter-spacing: 0.08em;
   color: var(--color-sage-800);
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .nested-card-venue {
   font-family: var(--font-serif);
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   font-style: italic;
   color: var(--color-text-muted);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .nested-card-flourish {
   color: var(--color-gold-rich);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 /* Scalable Responsive Envelope Pocket Flaps */
@@ -674,12 +673,12 @@ body::before {
 }
 
 .wax-seal-img {
-  width: 90px;
-  height: 90px;
+  width: 115px;
+  height: 115px;
   object-fit: contain;
   border-radius: 50%;
   display: block;
-  filter: drop-shadow(0 6px 16px rgba(110, 70, 20, 0.4));
+  filter: drop-shadow(0 6px 18px rgba(110, 70, 20, 0.42));
   transition: transform 0.4s ease;
   animation: seal-pulse 3s infinite ease-in-out;
 }
@@ -825,6 +824,131 @@ body::before {
   transform: translateY(-20px);
   pointer-events: none;
   transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+/* ==========================================================================
+   ENVELOPE CLOSING CHOREOGRAPHY (SMOOTH REVERSE CLOSING SEQUENCE)
+   ========================================================================== */
+.hero-envelope-stage.closing {
+  pointer-events: none;
+}
+
+/* Phase 1: Card descends back inside the envelope pocket */
+.hero-envelope-stage.closing .envelope-nested-card {
+  animation: card-slide-into-pocket 1.15s cubic-bezier(0.25, 1, 0.45, 1) forwards;
+}
+
+@keyframes card-slide-into-pocket {
+  0% {
+    transform: translate3d(0, -6%, 75px) scale(1.24);
+    z-index: 20;
+    box-shadow: 
+      0 0 65px rgba(255, 250, 220, 0.98),
+      0 0 115px rgba(236, 207, 122, 0.82),
+      0 30px 65px rgba(60, 45, 35, 0.38);
+    filter: brightness(1.08) contrast(1.03);
+  }
+  38% {
+    /* Glides down directly above the envelope pocket */
+    transform: translate3d(0, -20%, 25px) scale(1.08);
+    z-index: 20;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.03);
+  }
+  62% {
+    /* Slips gracefully behind the front pocket flaps */
+    transform: translate3d(0, -10%, 5px) scale(1.02);
+    z-index: 3;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+  }
+  100% {
+    /* Settles completely inside the envelope */
+    transform: translate3d(0, 0, 0) scale(1);
+    z-index: 3;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    filter: brightness(1);
+  }
+}
+
+/* Phase 2: Top flap folds shut smoothly AFTER card is safely tucked in */
+.hero-envelope-stage.closing .envelope-flap-top {
+  animation: flap-close-down 1.05s 0.85s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+}
+
+@keyframes flap-close-down {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(180deg);
+    z-index: 2;
+    filter: drop-shadow(0 -4px 10px rgba(110, 83, 67, 0.12));
+  }
+  45% {
+    /* Reaching near-vertical */
+    transform: translate3d(0, 0, 0) rotateX(95deg);
+    z-index: 2;
+  }
+  50% {
+    /* Flips to sit above the lower pocket flaps */
+    z-index: 6;
+  }
+  100% {
+    /* Lands snugly shut */
+    transform: translate3d(0, 0, 0) rotateX(0deg);
+    z-index: 6;
+    filter: drop-shadow(0 4px 10px rgba(110, 83, 67, 0.15));
+  }
+}
+
+/* Phase 3: Gold wax seal drops and stamps firmly onto the closed flap */
+.hero-envelope-stage.closing .wax-seal-wrapper {
+  animation: seal-stamp-in 0.6s 1.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes seal-stamp-in {
+  0% {
+    transform: translate3d(-50%, -170%, 0) scale(1.35);
+    opacity: 0;
+    filter: brightness(1.6) drop-shadow(0 0 35px #FFFFFF);
+  }
+  65% {
+    transform: translate3d(-50%, -46%, 0) scale(1.05);
+    opacity: 0.95;
+    filter: brightness(1.15) drop-shadow(0 6px 20px rgba(212, 175, 55, 0.45));
+  }
+  82% {
+    transform: translate3d(-50%, -52%, 0) scale(0.98);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity: 1;
+    filter: drop-shadow(0 6px 18px rgba(110, 70, 20, 0.42));
+  }
+}
+
+/* Extinguish Inner Light Radiance & Shafts Cleanly */
+.hero-envelope-stage.closing .envelope-inner-radiance,
+.hero-envelope-stage.closing .envelope-light-shafts,
+.hero-envelope-stage.closing .envelope-pocket-lip-glow,
+.hero-envelope-stage.closing .flap-inner-glow,
+.hero-envelope-stage.closing .seal-break-flash {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Instantly fade out navigation hint */
+.hero-envelope-stage.closing .card-revealed-hint {
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Fade back in initial action prompt & headline */
+.hero-envelope-stage.closing .open-invite-action,
+.hero-envelope-stage.closing .envelope-intro-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s 1.55s ease, transform 0.8s 1.55s ease;
 }
 
 /* Centered Card Navigation Prompt (Fades in once card is centered and close) */
@@ -2002,6 +2126,37 @@ body::before {
         0 0 80px rgba(236, 207, 122, 0.75),
         0 20px 45px rgba(100, 75, 60, 0.25);
       filter: brightness(1.08) contrast(1.03);
+    }
+  }
+
+  /* Mobile Closing Card Animation */
+  .hero-envelope-stage.closing .envelope-nested-card {
+    animation: card-slide-into-pocket-mobile 1.15s cubic-bezier(0.25, 1, 0.45, 1) forwards;
+  }
+
+  @keyframes card-slide-into-pocket-mobile {
+    0% {
+      transform: translate3d(0, -4%, 45px) scale(1.10);
+      z-index: 20;
+      box-shadow: 
+        0 0 45px rgba(255, 245, 210, 0.98),
+        0 0 80px rgba(236, 207, 122, 0.75),
+        0 20px 45px rgba(100, 75, 60, 0.25);
+      filter: brightness(1.08) contrast(1.03);
+    }
+    40% {
+      transform: translate3d(0, -16%, 15px) scale(1.04);
+      z-index: 20;
+    }
+    65% {
+      transform: translate3d(0, -6%, 2px) scale(1);
+      z-index: 3;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      z-index: 3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      filter: brightness(1);
     }
   }
 
